@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Elsnertech_Donation::css/donation.css" />
+    </head>
+    <body>
+        <referenceContainer name="sidebar.additional">
+            <block class="Elsnertech\Donation\Block\Donation\ListProduct" name="sidebar.donation.list" before="-" template="donation.phtml" ifconfig="elsnertech_donation_product/layout/sidebar_enabled"/>
+        </referenceContainer>
+    </body>
+</page>

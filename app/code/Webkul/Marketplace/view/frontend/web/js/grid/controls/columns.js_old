@@ -1,0 +1,18 @@
+	
+
+return Collection.extend({
+    defaults: {
+        template: 'ui/grid/controls/columns',
+        minVisible: 1,
+        maxVisible: 9,
+        viewportSize: 18,
+        displayArea: 'dataGridActions',
+        columnsProvider: 'ns = ${ $.ns }, componentType = columns',
+        imports: {
+            addColumns: '${ $.columnsProvider }:elems'
+        },
+        templates: {
+            headerMsg: $t('${ $.visible } out of ${ $.total } visible')
+        }
+    }
+});

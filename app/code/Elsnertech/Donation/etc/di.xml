@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Copyright © Experius. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+	<type name="Magento\Framework\View\Element\UiComponent\Argument\Interpreter\ConfigurableObject">
+        <arguments>
+            <argument name="classWhitelist" xsi:type="array">
+                <item name="0" xsi:type="string">Magento\Framework\Data\OptionSourceInterface</item>
+                <item name="1" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProviderInterface</item>
+                <item name="2" xsi:type="string">Magento\Framework\View\Element\UiComponent\ContextInterface</item>
+            </argument>
+        </arguments>
+    	</type>
+    	
+	<preference for="Elsnertech\Donation\Api\DonationsRepositoryInterface" type="Elsnertech\Donation\Model\DonationsRepository"/>
+	<preference for="Elsnertech\Donation\Api\Data\DonationsInterface" type="Elsnertech\Donation\Model\Donations"/>
+	<preference for="Elsnertech\Donation\Api\Data\DonationsSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<preference for="Elsnertech\Donation\Api\Data\DonationOptionsInterface" type="Elsnertech\Donation\Model\DonationOptions"/>
+
+	<type name="Magento\Catalog\Helper\Product\Configuration">
+		<plugin disabled="false" name="Elsnertech_Donation_Plugin_Magento_Catalog_Helper_Product_Configuration" sortOrder="0" type="Elsnertech\Donation\Plugin\Magento\Catalog\Helper\Product\Configuration"/>
+	</type>
+	<type name="Magento\Checkout\Block\Cart\Item\Renderer">
+		<plugin disabled="false" name="Elsnertech_Donation_Plugin_Magento_Checkout_Block_Cart_Item_Renderer" sortOrder="0" type="Elsnertech\Donation\Plugin\Magento\Checkout\Block\Cart\Item\Renderer"/>
+	</type>
+	<type name="Magento\Catalog\Block\Product\ListProduct">
+		<plugin disabled="false" name="Elsnertech_Donation_Plugin_Magento_Catalog_Block_Product_ListProduct" sortOrder="10" type="Elsnertech\Donation\Plugin\Magento\Catalog\Block\Product\ListProduct"/>
+	</type>
+
+	<type name="Magento\Quote\Model\Quote\Item\Repository">
+		<arguments>
+			<argument name="cartItemProcessors" xsi:type="array">
+				<item name="donation" xsi:type="object">Elsnertech\Donation\Model\Quote\Item\CartItemProcessor</item>
+			</argument>
+		</arguments>
+	</type>
+	
+	<virtualType name="Elsnertech\Donation\Model\ResourceModel\Donations\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">elsnertech_donations</argument>
+			<argument name="resourceModel" xsi:type="string">Elsnertech\Donation\Model\ResourceModel\Donations\Collection</argument>
+		</arguments>
+	</virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="elsnertech_donation_donations_grid_data_source" xsi:type="string">Elsnertech\Donation\Model\ResourceModel\Donations\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+
+
+</config>
